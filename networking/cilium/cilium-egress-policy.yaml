@@ -1,0 +1,17 @@
+    apiVersion: cilium.io/v2
+    kind: CiliumEgressGatewayPolicy
+    metadata:
+      name: my-egress-policy
+    spec:
+      selectors:
+        - podSelector:
+            matchLabels:
+              app: mealie # Select pods with this label
+      destinationCIDRs:
+        - "0.0.0.0/0" # Allow access to all external IPs (or specify specific CIDRs)
+      egressGateway:
+        nodeSelector:
+          matchLabels:
+            #node.kubernetes.io/name: k8s-worker 
+            egress-node: "true" # Select a node labeled as an egress gateway
+        egressIP: "74.207.233.24" # Use the node's public IP (or specify a static IP)

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  annotations:
+    service.cilium.io/node: "k8s-worker" # Matches the node label value
+spec:
+  selector:
+    app: mealie
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+  type: ClusterIP
